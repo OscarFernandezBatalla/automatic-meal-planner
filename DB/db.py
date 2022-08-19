@@ -1,5 +1,6 @@
 import mysql.connector
 import DB.config as config
+import pandas as pd
 
 class Database:
 
@@ -13,8 +14,41 @@ class Database:
 
         self.cursor = self.db_instance.cursor()
 
+    def query_res_to_df(self, result_sql, column_names):
+        return pd.DataFrame(result_sql, columns=column_names)
+
+    """
+    GETTER FUNCTIONS
+    """
     def get_all_recipes(self):
         self.cursor.execute("SELECT * FROM recipes")
+        result = self.cursor.fetchall()
+        column_names = [i[0] for i in self.cursor.description]
+        return self.query_res_to_df(result, column_names)
+
+    def get_all_ingredients(self):
+        self.cursor.execute("SELECT * FROM ingredients")
+        result = self.cursor.fetchall()
+
+        for x in result:
+            print(x)
+
+    def get_all_quantities(self):
+        self.cursor.execute("SELECT * FROM quantities")
+        result = self.cursor.fetchall()
+
+        for x in result:
+            print(x)
+
+    def get_all_difficulty_levels(self):
+        self.cursor.execute("SELECT * FROM difficulty")
+        result = self.cursor.fetchall()
+
+        for x in result:
+            print(x)
+
+    def get_all_cuisine_styles(self):
+        self.cursor.execute("SELECT * FROM cuisine_styles")
         result = self.cursor.fetchall()
 
         for x in result:
@@ -30,3 +64,17 @@ class Database:
 
         for x in result:
             print(x)
+
+    """
+    INSERT FUNCTIONS
+    """
+
+    def insert_ingredient(self, quantity_name):
+
+        sql = "INSERT INTO meals.quantities (quantity_id, quantity_name) VALUES (%s, %s);"
+        val = ("John", "Highway 21")
+        self.cursor.execute(sql, val)
+
+        self.db_instance.commit()
+
+        print(self.cursor.rowcount, "records inserted.")

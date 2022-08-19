@@ -1,30 +1,30 @@
 CREATE TABLE `cuisine_styles` (
-  `cuisine_style_id` int NOT NULL,
+  `cuisine_style_id` int NOT NULL AUTO_INCREMENT,
   `cuisine_style_name` varchar(45) NOT NULL,
   PRIMARY KEY (`cuisine_style_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `difficulty` (
-  `difficulty_id` int NOT NULL,
+  `difficulty_id` int NOT NULL AUTO_INCREMENT,
   `difficulty_name` varchar(45) NOT NULL,
   `difficulty_value` int NOT NULL,
   PRIMARY KEY (`difficulty_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `ingredients` (
-  `ingredient_id` int NOT NULL,
+  `ingredient_id` int NOT NULL AUTO_INCREMENT,
   `ingredient_name` varchar(45) NOT NULL,
   PRIMARY KEY (`ingredient_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `quantities` (
-  `quantity_id` int NOT NULL,
+  `quantity_id` int NOT NULL AUTO_INCREMENT,
   `quantity_name` varchar(45) NOT NULL,
   PRIMARY KEY (`quantity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `recipes` (
-  `recipe_id` int NOT NULL,
+  `recipe_id` int NOT NULL AUTO_INCREMENT,
   `recipe_name` varchar(45) NOT NULL,
   `difficulty_id` int NOT NULL,
   `cuisine_style_id` int NOT NULL,
