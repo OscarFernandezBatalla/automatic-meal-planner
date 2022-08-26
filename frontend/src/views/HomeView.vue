@@ -20,9 +20,9 @@
 					30 minutes
 					
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -32,9 +32,9 @@
 				
 				<img src="../assets/arroz.jpg" @click="goRecipeDetails">
 				
-				<div  class="fav-container" @click="clicked = !clicked" 
+				<div  class="fav-container" 
 				v-bind:class="{'white': !clicked, 'yellow': clicked}">
-					<i><font-awesome-icon icon="star" /></i>
+					<i @click="clicked = !clicked" ><font-awesome-icon icon="star" /></i>
 				</div>
 				
 				
@@ -60,9 +60,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
 
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="not__icon">
+					<i class="not_available_icon">
 						<font-awesome-icon icon="circle-xmark" />
 					</i>
 				</div>
@@ -96,9 +96,9 @@
 					<i><font-awesome-icon icon="star" /></i>	
 				</div>
 
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="not__icon">
+					<i class="not_available_icon">
 						<font-awesome-icon icon="circle-xmark" />
 					</i>
 				</div>
@@ -129,9 +129,9 @@
 					<i><font-awesome-icon icon="star" /></i>	
 				</div>
 
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="not__icon">
+					<i class="not_available_icon">
 						<font-awesome-icon icon="circle-xmark" />
 					</i>
 				</div>
@@ -162,9 +162,9 @@
 					<i><font-awesome-icon icon="star" /></i>	
 				</div>
 
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="not__icon">
+					<i class="not_available_icon">
 						<font-awesome-icon icon="circle-xmark" />
 					</i>
 				</div>
@@ -191,9 +191,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -220,9 +220,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -249,9 +249,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -278,9 +278,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -306,9 +306,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
@@ -335,9 +335,9 @@
 					<i><font-awesome-icon icon="star" /></i>
 					<i><font-awesome-icon icon="star" /></i>
 				</div>
-				<div class="card-">
+				<div class="card-available">
 					
-					<i class="_icon">
+					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>

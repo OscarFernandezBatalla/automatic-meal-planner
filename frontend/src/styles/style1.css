@@ -27,6 +27,7 @@ nav{
     min-height: 8vh;
     background-color: var(--main-color);
     font-family: 'Poppins', sans-serif;
+    padding: 1%;
     
 
     
@@ -250,6 +251,11 @@ nav{
     
   }
 
+
+  .fav-container > i{
+    padding-right: 5px;
+  }
+
   .yellow{
     color: yellow;
   }
@@ -345,7 +351,6 @@ nav{
     background-color: #ebc19b;
     padding: 0 25%;
 
-
 }
 
 .recipe-title{
@@ -378,3 +383,44 @@ nav{
 .recipe-process{
     
 }
+
+
+
+/* MyRecipes New Recipe Card */
+
+.default_card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid black;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 5rem;
+    font-weight: bold;
+
+  }
+
+
+  .default_card:hover{
+    background-color: yellow;
+
+
+  }
+
+  .edit-icon{
+    color: aqua;
+  }
+  .delete-icon{
+    color: black;
+  }
+
+
+  .card a {
+    text-decoration: none;
+  }
+  

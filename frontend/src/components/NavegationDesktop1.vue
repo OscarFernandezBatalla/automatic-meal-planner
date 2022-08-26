@@ -6,7 +6,7 @@
         </div>
         <ul class="nav-links" :class="{'nav-active':showNav}">
             <li>
-                <a href="/" >My Recipes</a>
+                <a href="/my-recipes" >My Recipes</a>
             </li>
             <li>
                 <a href="/">Storage</a>
