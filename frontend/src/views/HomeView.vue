@@ -43,313 +43,53 @@
 		
     </div>
 
+	
 
-	<div class="card">
+
+	<div class="card" v-for="recipe in recipes" v-bind:key="recipe.id">
+		
+		
         <div class="card-container">
-			<div class="card-info">
+			<div class="card-info" @click="goRecipeDetails">
 				<div class="card-title">
-					
-					Pollo al limón
+					{{ recipe.name }}
 				</div>
 				
 				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
+					{{ recipe.difficulty }}
+					
 				</div>
-
 				<div class="card-available">
 					
-					<i class="not_available_icon">
-						<font-awesome-icon icon="circle-xmark" />
+					<i class="available_icon">
+						<font-awesome-icon icon="circle-check" />
 					</i>
 				</div>
 			</div>
 
-			<div class="card-pic">
-				<img src="../assets/pollo_limon.jpg" >
-				<div class="fav-container" @click="clicked = !clicked" 
+			<div class="card-pic" >
+				
+				{{ recipe.get_image }}
+				<img v-bind:src="'http://127.0.0.1:8000' + recipe.image" @click="goRecipeDetails">
+
+				<img v-bind:src="recipe.get_image" @click="goRecipeDetails">
+
+		
+				
+				
+				
+				<div  class="fav-container" 
 				v-bind:class="{'white': !clicked, 'yellow': clicked}">
-					<i><font-awesome-icon icon="star" /></i>
+					<i @click="clicked = !clicked" ><font-awesome-icon icon="star" /></i>
 				</div>
 				
 				
 			</div>
         </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Pollo al limón
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>	
-				</div>
-
-				<div class="card-available">
-					
-					<i class="not_available_icon">
-						<font-awesome-icon icon="circle-xmark" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/pollo_limon.jpg" >
-				
-				
-			</div>
-        </div>
+		
     </div>
 
 
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Pollo al limón
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>	
-				</div>
-
-				<div class="card-available">
-					
-					<i class="not_available_icon">
-						<font-awesome-icon icon="circle-xmark" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/pollo_limon.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Pollo al limón
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>	
-				</div>
-
-				<div class="card-available">
-					
-					<i class="not_available_icon">
-						<font-awesome-icon icon="circle-xmark" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/pollo_limon.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
-
-	<div class="card">
-        <div class="card-container">
-			<div class="card-info">
-				<div class="card-title">
-					
-					Arroz
-				</div>
-				
-				<div class="card-dificulty">
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-					<i><font-awesome-icon icon="star" /></i>
-				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
-			</div>
-
-			<div class="card-pic">
-				<img src="../assets/arroz.jpg" >
-				
-				
-			</div>
-        </div>
-    </div>
 
 
 
@@ -367,6 +107,8 @@
 
 <script>
 
+import axios from 'axios'
+
 
 export default {
   name: 'HomeView',
@@ -374,8 +116,12 @@ export default {
   },
   data(){
 	return{
-		clicked: false
+		clicked: false,
+		recipes: null,
 	}
+  },
+  created(){
+	this.getAllRecipes()
   },
   methods:{
 	changeFav(){
@@ -383,6 +129,20 @@ export default {
 	},
 	goRecipeDetails(){
 		this.$router.push( { name: 'recipe-details' })
+	},
+
+	getAllRecipes(){
+		axios
+        .get('/api/recipes/')
+        .then(response => {
+          this.recipes = response.data
+		  console.log(this.recipes)
+
+		  
+        })
+        .catch(error => {
+          console.log(error)
+        })
 	}
   }
 }

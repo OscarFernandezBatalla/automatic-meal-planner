@@ -1,10 +1,14 @@
 :root{
-    --main-color: #673ab7;
+    --main-color: #e27e20;
     --secondary-color: #a688da;
 
     --actual-main: #ebae75;
 
 
+}
+
+html{
+    background-color: #ebc19b;
 }
 
 *{
@@ -27,7 +31,7 @@ nav{
     min-height: 8vh;
     background-color: var(--main-color);
     font-family: 'Poppins', sans-serif;
-    padding: 1%;
+    
     
 
     
@@ -66,7 +70,7 @@ nav{
 }
 
 .nav-links li:hover{
-    background-color: rgb(187, 129, 4);
+    background-color: rgb(238, 164, 3);
   
 }
 
@@ -225,7 +229,7 @@ nav{
   .grid-cards{
     
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
     gap: 2rem;
   }
 

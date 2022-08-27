@@ -8,3 +8,6 @@ urlpatterns = [
     path('', include('recipes.urls')),
     path('api/', include('recipes.api.urls'))
 ]
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'amp.urls'
@@ -122,7 +124,23 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+MEDIA_URL = '/images/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
+
+MEDIA_ROOT = BASE_DIR / 'recipes/static/images'
+
+#TODO: ADD MEDIA FILES
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+]
