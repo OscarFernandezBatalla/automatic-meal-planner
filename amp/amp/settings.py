@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     #TODO: aqui declarem les apps/llibreries que instalem nosaltres
     'recipes.apps.RecipesConfig',
     "rest_framework",
-    "corsheaders", 
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
