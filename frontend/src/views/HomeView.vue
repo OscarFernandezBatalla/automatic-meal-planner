@@ -69,10 +69,9 @@
 
 			<div class="card-pic" >
 				
-				{{ recipe.get_image }}
-				<img v-bind:src="'http://127.0.0.1:8000' + recipe.image" @click="goRecipeDetails">
-
-				<img v-bind:src="recipe.get_image" @click="goRecipeDetails">
+		
+	
+				<img v-bind:src="recipe.image_url" @click="goRecipeDetails">
 
 		
 				
