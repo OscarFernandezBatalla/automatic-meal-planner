@@ -28,7 +28,8 @@ class RecipeSerializer(ModelSerializer):
             'dinners',
             'difficulty',
             'cuisine_style',
-            'ingredients'
+            'ingredients',
+            'fav'
         )
 
     def get_image(self, object):

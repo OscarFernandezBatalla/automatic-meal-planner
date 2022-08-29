@@ -31,6 +31,8 @@ class Recipe(models.Model):
     cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
     ingredients = models.ManyToManyField(Ingredient) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
 
+    fav = models.BooleanField(default=False)
+
     def get_image(self):
         if self.image:
             return 'http://127.0.0.1:8000' + self.image.url

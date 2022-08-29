@@ -78,8 +78,8 @@
 				
 				
 				<div  class="fav-container" 
-				v-bind:class="{'white': !clicked, 'yellow': clicked}">
-					<i @click="clicked = !clicked" ><font-awesome-icon icon="star" /></i>
+				v-bind:class="{'white': recipe.fav == false, 'yellow': recipe.fav == true}">
+					<i @click="changeFav(recipe)" ><font-awesome-icon icon="star" /></i>
 				</div>
 				
 				
@@ -123,8 +123,8 @@ export default {
 	this.getAllRecipes()
   },
   methods:{
-	changeFav(){
-		
+	changeFav(recipe){
+		recipe.fav = !recipe.fav
 	},
 	goRecipeDetails(){
 		this.$router.push( { name: 'recipe-details' })
