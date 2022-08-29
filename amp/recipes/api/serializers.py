@@ -21,6 +21,7 @@ class RecipeSerializer(ModelSerializer):
         #fields = "__all__"
 
         fields = (
+            'id',
             'name',
             'image_url',
             'dinners',

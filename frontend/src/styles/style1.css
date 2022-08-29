@@ -1,6 +1,18 @@
 :root{
-    --main-color: #e27e20;
-    --secondary-color: #a688da;
+
+    --main-color: #FFDBCC;
+    /* --main-color: #e27e20;
+    --secondary-color: #a688da; */
+    --secondary-color: #E9F1F7;
+    --navbar-color: rgb(187, 126, 126);
+    
+    
+    /*--card-color-secondary: #B6CFB6;
+    --card-color-primary: #CCE2CB;*/
+    --card-color-secondary: #ffda9e;
+    --card-color-primary: #fdf9c4;
+
+    
 
     --actual-main: #ebae75;
 
@@ -8,13 +20,14 @@
 }
 
 html{
-    background-color: #ebc19b;
+    background-color: var(--main-color)
 }
 
 *{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -29,7 +42,7 @@ nav{
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
-    background-color: var(--main-color);
+    background-color: var(--navbar-color);
     font-family: 'Poppins', sans-serif;
     
     
@@ -39,14 +52,14 @@ nav{
 }
 
 .logo{
-    color: rgb(226, 226, 226);
+    color: black;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
 }
 
 .logo a{
-    color: rgb(226, 226, 226);
+    color: white;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
@@ -58,30 +71,32 @@ nav{
     display: flex;
     width: 40%;
     justify-content: space-around;
+    
 }
 
 .nav-links li{
     list-style: none;
-    background-color: white;
+    
     padding: 10px;
     border-radius: 20px;
     /*border: 1px black solid;*/
     
 }
 
-.nav-links li:hover{
-    background-color: rgb(238, 164, 3);
+.nav-links li a:hover{
+    /*background-color: var(--navbar-color);*/
+    color: black;
   
 }
 
 .nav-links a{
     /*color: rgb(226, 226, 226);*/
-    color: black;
+    color: white;
     text-decoration: none;
     letter-spacing: 3px;
     font-weight: bold;
     font-size: 14px;
-}
+}   
 
 
 
@@ -92,7 +107,7 @@ nav{
 .burger div{
     width: 25px;
     height: 3px;
-    background-color: rgb(226, 226, 226);
+    background-color: var(--secondary-color);
     margin: 5px;
     transition: all 0.3s ease;
 }
@@ -112,7 +127,7 @@ nav{
         right: 0;
         height: 92vh;
         top: 8vh;
-        background-color: #ebae75;
+        background-color: var(--navbar-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -180,12 +195,15 @@ nav{
 
 .home{
     text-align: center;
-    background-color: #ebc19b;
+    background-color: var(--primary-color);
     padding: 0 50px 0 50px;
 }
 
 .home > h1 {
-    padding: 30px
+    padding: 30px;
+    color: rgb(117, 107, 107);
+    font-size: 4rem;
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 .card {
@@ -193,7 +211,7 @@ nav{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
     transition: 0.3s;
     border-radius: 20px;
-    background-color: #ebae75;
+    background-color: var(--primary-color);
     cursor: pointer;
     border: 1px solid black;
     
@@ -247,7 +265,7 @@ nav{
 
     top:0px;
     right: 0px;
-    color: white;
+    color: var(--secondary-color);
     padding: 5px;
     
     stroke: black;
@@ -264,7 +282,7 @@ nav{
     color: yellow;
   }
   .white{
-    color: white;
+    color: var(--secondary-color);
   }
 
   .card-pic > img{
@@ -292,9 +310,9 @@ nav{
     border-right: 1px black solid;*/
     border-bottom: 1px black solid;
     border-top-left-radius: 20px;
-    background-color: red;
-    color: white;
-   
+    background-color: var(--card-color-primary);
+    color: black;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -310,9 +328,10 @@ nav{
     justify-content: center;
     align-items: center;
     font-size: 1rem;
-    color: yellow;
+    color: black;
     text-shadow: black;
-    background-color:rgb(105, 72, 72);
+    background-color: var(--card-color-secondary);
+    border-bottom-left-radius: 20px;
     
   }
 
@@ -320,7 +339,7 @@ nav{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(187, 126, 126);
+    background-color: var(--card-color-secondary);
     border-bottom-left-radius: 20px;
     stroke: black;
     stroke-width: 10px;
@@ -337,7 +356,7 @@ nav{
   .card-info{
     
     display: grid;
-    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
     font-size: 1.2rem;
     
     

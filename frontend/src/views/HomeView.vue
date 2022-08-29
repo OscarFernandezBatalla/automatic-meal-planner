@@ -17,15 +17,15 @@
 				</div>
 				
 				<div class="card-dificulty">
-					30 minutes
+					30 '
 					
 				</div>
-				<div class="card-available">
+				<!-- <div class="card-available">
 					
 					<i class="available_icon">
 						<font-awesome-icon icon="circle-check" />
 					</i>
-				</div>
+				</div>-->
 			</div>
 
 			<div class="card-pic" >
@@ -59,12 +59,7 @@
 					{{ recipe.difficulty }}
 					
 				</div>
-				<div class="card-available">
-					
-					<i class="available_icon">
-						<font-awesome-icon icon="circle-check" />
-					</i>
-				</div>
+				
 			</div>
 
 			<div class="card-pic" >
