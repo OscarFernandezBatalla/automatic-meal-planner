@@ -125,6 +125,12 @@ export default {
   methods:{
 	changeFav(recipe){
 		recipe.fav = !recipe.fav
+		let url = "/api/update-fav-recipe/" + String(recipe.id) + "/"
+		console.log(url)
+		axios
+		.post(url)
+		console.log("recipe FAV" , recipe.fav)
+		//Todo: Update with POST method in bbdd.
 	},
 	goRecipeDetails(){
 		this.$router.push( { name: 'recipe-details' })
