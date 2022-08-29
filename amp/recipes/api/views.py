@@ -11,21 +11,12 @@ from rest_framework.response import Response
 from recipes.api import serializers
 
 
-# TODO: exemple:
-"""
-@api_view(['GET'])
-def getRooms(request):
-    rooms = Room.objects.all()
-    serializer = RoomSerializer(rooms, many=True)
-    return Response(serializer.data) 
-"""
-
-
 @api_view(['GET'])
 def get_all_recipes(request):
     recipes = Recipe.objects.all()
     serializer = RecipeSerializer(recipes, many=True)
     return Response(serializer.data)
+
 
 
 @api_view(['POST'])
@@ -37,3 +28,10 @@ def post_fav(request, id):
         recipe.save()
 
     return HttpResponse('Correct')
+
+@api_view(['GET'])
+def get_recipe_by_id(request, recipe_id):
+    recipe = Recipe.objects.get(pk=recipe_id)
+    serializer = RecipeSerializer(recipe, many=False)
+    return Response(serializer.data)
+

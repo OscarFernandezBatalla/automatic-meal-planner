@@ -20,8 +20,6 @@ class RecipeSerializer(ModelSerializer):
         model = Recipe
         #fields = "__all__"
 
-        
-
         fields = (
             'name',
             'image_url',
@@ -29,13 +27,12 @@ class RecipeSerializer(ModelSerializer):
             'difficulty',
             'cuisine_style',
             'ingredients',
-            'fav'
+            'fav',
+            'time'
         )
 
     def get_image(self, object):
-            if object.image:
-                return 'http://127.0.0.1:8000' + object.image.url
+        if object.image:
+            return 'http://127.0.0.1:8000' + object.image.url
 
 
-        
-        
