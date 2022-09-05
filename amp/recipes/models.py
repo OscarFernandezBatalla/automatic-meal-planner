@@ -12,8 +12,13 @@ class FoodItem(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
 
 
-class Quantity(models.Model):
+class Unit(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
+
+
+class Quantity(models.Model):
+    value = models.IntegerField()
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
 
 
 class Ingredient(models.Model):
