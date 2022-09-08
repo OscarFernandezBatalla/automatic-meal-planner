@@ -52,3 +52,4 @@ class WebUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     liked_recipes = models.ManyToManyField(Recipe, related_name="liked_recipes")
     own_recipes = models.ManyToManyField(Recipe, related_name="own_recipes") # maybe not
+    storage = models.ManyToManyField(Ingredient, related_name="storage")
