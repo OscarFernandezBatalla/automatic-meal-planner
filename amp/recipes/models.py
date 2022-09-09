@@ -29,14 +29,14 @@ class Recipe(models.Model):
         (5, 'Muy difícil')
     )
 
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, null=True)
     image = models.ImageField(null=True, default="arroz.jpg")
-    dinners = models.IntegerField()
-    difficulty = models.IntegerField(choices=DIFFICULTY)
-    cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
-    ingredients = models.ManyToManyField(Ingredient) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
-    fav = models.BooleanField(default=False)
-    time = models.IntegerField()
+    dinners = models.IntegerField(null=True)
+    difficulty = models.IntegerField(choices=DIFFICULTY, null=True)
+    cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE, null=True) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
+    ingredients = models.ManyToManyField(Ingredient, null=True) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
+    fav = models.BooleanField(default=False, null=True)
+    time = models.IntegerField(null=True)
 
     def get_image(self):
         if self.image:

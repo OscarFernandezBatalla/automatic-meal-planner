@@ -370,7 +370,7 @@ nav{
 /* RECIPE PAGE */
 
 .recipe-home{
-    text-align: center;
+    text-align: left;
     background-color: #ebc19b;
     padding: 0 25%;
 
@@ -386,8 +386,6 @@ nav{
     font-size: 1.5rem;
     justify-content: space-between;
     padding: 0 0 5%;
-
-
 }
 
 
@@ -398,8 +396,8 @@ nav{
     border: 1px solid black;
 }
 
-.recipe-ingredients{
-    
+.recipe-ingredients > ul{
+    list-style: none;
 }
 
 
@@ -430,7 +428,7 @@ nav{
 
 
   .default_card:hover{
-    background-color: yellow;
+    background-color:var(--navbar-color);
 
 
   }
@@ -447,3 +445,188 @@ nav{
     text-decoration: none;
   }
   
+/* CREATE A RECIPE FORM */
+
+.modal{
+  width: 60%;
+  height: 80%;
+  
+  margin: 100px auto;
+  background: var(--card-color-secondary);
+  border-radius: 20px;
+  border: 1px black solid;
+  text-align: left;
+  overflow: auto;
+}
+
+@media (max-width:768px) {
+  .modal{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+
+
+
+
+.backdrop{
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+}
+
+.modal .title {
+  border-radius: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom: 1px black solid;
+  background-color: var(--main-color);
+  padding: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 5px;
+  
+
+}
+
+.modal .form_group{
+  padding: 30px 0 0 50px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal .title i {
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.modal label{
+  font-size: 1.4rem;
+  margin-right: 10px;
+  
+}
+.modal input{
+  font-size: 1.4rem;
+  border: 1px black solid;
+  border-radius: 20px;
+  background-color: var(--card-color-primary);
+  padding-left: 2%;
+
+  
+  
+}
+
+.modal #image{
+  border: 0;
+  background-color: var(--card-color-secondary);
+  
+}
+
+.modal .button {
+  
+  border-radius: 5px;
+  margin: 0 10px;
+  height: 30px;
+  width: 30px;
+  
+  font-size: 1rem;
+  background-color: var(--main-color);
+  cursor: pointer;
+ 
+}
+
+.ingredients-button-container,
+.step-button-container{
+  padding: 30px 0 0 50px;
+  display: flex;
+  
+}
+
+.ingredients-button-container button,
+.step-button-container button {
+  margin-left: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--main-color);
+}
+
+
+
+.modal .form_action{
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+
+
+#ingredients-list{
+
+}
+
+.form_action #button_submit {
+  margin-left: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--main-color);
+}
+
+.form_action #button_cancel {
+  margin-left: 20px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: var(--main-color);
+
+}
+
+.step-container{
+  margin: 30px 50px;
+  display: flex;
+
+  
+  
+  background-color: #E9F1F7;
+  border-radius: 20px;
+  overflow:hidden;
+  border: 1px solid black;
+}
+
+
+.step-container textarea{
+  padding: 20px;
+  flex-grow: 1;
+
+}
+
+.step-container p{
+  padding: 20px;
+  
+
+}
+
+.box-step-number{
+  background-color: var(--main-color);
+  font-size: 1.4rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid black;
+  padding: 20px;
+
+}
+
+.delete-step{
+  padding: 20px;
+  background-color: var(--main-color);
+  border: 0;
+  cursor: pointer;
+  border-left: 1px solid black;
+  padding: 20px;
+
+}
