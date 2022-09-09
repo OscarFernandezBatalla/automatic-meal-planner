@@ -12,7 +12,7 @@ urlpatterns = [
     path('cuisine_styles/', views.get_styles),
     path('units/', views.get_units),
     path('food_items/', views.get_food_items),
-    path('difficulty/', views.get_difficulty),
+    path('difficulty/', views.get_all_difficulty_levels),
     
 
 ]

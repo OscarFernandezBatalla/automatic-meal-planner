@@ -498,7 +498,42 @@ nav{
   padding: 30px 0 0 50px;
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+
+}
+
+.modal .form_group_ingredients {
+  
+  align-items: center;
+ 
+  display: flex;
+  width: 100%;
+  border-radius: 20px;
+  overflow:hidden;
+  border: 1px solid black;
+
+}
+
+.modal #ingredient-list{
+  padding: 30px 50px;
+}
+
+
+
+.modal .form_group_ingredients input, .modal .form_group_ingredients .ingredient_delete, .modal .form_group_ingredients .ingredient_num, .form_group_ingredients .ingredient-select{
+  padding: 0.5rem;
+  border: 0;
+  margin: 0;
+  border-radius: 0;
+  border-right: 1px solid black;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.4rem;
+
+}
+
+.modal .form_group_ingredients{
+  margin-bottom: 2rem;
 }
 
 .modal .title i {
@@ -519,10 +554,23 @@ nav{
   
   margin-left: 2rem;
   text-align: center;
+}
 
-  
+.modal .ingredient_num, .modal .ingredient_delete{
+  font-size: 1.4rem;
+  border: 1px black solid;
+  border-radius: 20px;
+  padding: 0 2rem;
+  background-color: var(--main-color);
   
 }
+.modal .ingredient_delete{
+  cursor: pointer;
+  margin-left: 2rem;
+}
+
+
+
 .modal #image{
   border-radius: 0;
 
@@ -646,4 +694,6 @@ nav{
   padding: 20px;
 
 }
+
+
 

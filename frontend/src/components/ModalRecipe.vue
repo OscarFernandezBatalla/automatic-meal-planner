@@ -38,7 +38,7 @@
                 <div class="form_group">
                     <label for="difficulty">Difficulty:</label>
                     <select v-model="difficulty" id="difficulty"> <!--TODO STYLE... -->
-                    <option v-for="dif in difficulty_list['DIFFICULTY']" v-bind:key="dif">{{dif}}</option>
+                    <option v-for="dif in difficulty_list" v-bind:key="dif">{{dif.name}}</option>
                     
                     
                     </select>
@@ -160,7 +160,7 @@ export default {
             cuisine_style: null,
             ingredinets: null,
             fav: true,
-            time: 30,
+            time: 0,
             num_steps: 0,
             cuisine_styles: null,
             num_ingredient: 0,
@@ -183,9 +183,9 @@ export default {
             axios
             .get('/api/difficulty/')
             .then(response => {
-            this.difficulty_list = response.data[0]
+            this.difficulty_list = response.data
             console.log("dificulty")
-            console.log(response.data[0])
+            console.log(response.data)
             })
             .catch(error => {
             console.log(error)
@@ -304,6 +304,7 @@ export default {
         addIngredient(){
 
             console.log(this.num_ingredient)
+            this.num_ingredient += 1
             // div class="form_group">
             //         <label for="Cuisine">Ingredients:</label>
             //         <input type="text" v-model="cuisine_style" id="cuisine_style" required list="cuisine_list"> <!--TODO STYLE... -->
@@ -324,59 +325,57 @@ export default {
             
             //li.appendChild(document.createTextNode("Element 4"));
             //ul.appendChild(li);
-            var arrayIngredients = ["Patata","Aceite","Mayonesa","Pollo"]; //TODO: axios on create!
-            var arrayIngredients = this.ingredients_list
-            var arrayUnities = ["Gramos","Pizca","Cucharada","Cucharadita"];
-            var arrayUnities = this.units
+           
+ 
 
-            const newLabel = document.createElement("label");
-            newLabel.setAttribute("for", 'checkbox');
+        
           
 
             const divFormGroup = document.createElement("div");
-            divFormGroup.classList.add('form_group')
+            divFormGroup.classList.add('form_group_ingredients')
 
 
+            const numIngredientDiv = document.createElement("div")
+            numIngredientDiv.classList.add('ingredient_num')
+            numIngredientDiv.innerHTML += this.num_ingredient
+            divFormGroup.appendChild(numIngredientDiv)
+
+            const ingredient_delete = document.createElement("div")
+            ingredient_delete.classList.add('ingredient_delete')
+            ingredient_delete.innerHTML += "x"
+            
+
+               
             
             
-            const ingredientSelect = document.createElement("select");
-            //newCheckbox.setAttribute("type", 'text');
-            ingredientSelect.setAttribute("id", 'ingredient1');
+           
 
             const unitySelect = document.createElement("select");
             //newCheckbox.setAttribute("type", 'text');
             unitySelect.setAttribute("id", 'unity1');
+            unitySelect.classList.add('ingredient-select')
 
 
 
             const quantity = document.createElement("input");
             quantity.setAttribute("type", 'text');
+            quantity.setAttribute("placeholder", 'Quantity')
 
 
-
-
-
-            //Create and append the options
-            // for (var i = 0; i < arrayIngredients.length; i++) {
-                // var option = document.createElement("option");
-                // option.value = arrayIngredients[i];
-                // option.text = arrayIngredients[i];
-                // ingredientSelect.appendChild(option);
-            // }
-
-            for (var i = 0; i < arrayUnities.length; i++) {
+            for (var i = 0; i < this.units.length; i++) {
                 var option = document.createElement("option");
-                option.value = arrayUnities[i].name;
-                option.text = arrayUnities[i].name;
+                option.value = this.units[i].name;
+                option.text = this.units[i].name;
                 unitySelect.appendChild(option);
             }
             
 
 
-            this.num_ingredient += 1
+            
             const ingredient_input = document.createElement("input");
             ingredient_input.type = "text"
             ingredient_input.id="ingredient"+String(this.num_ingredient)
+            ingredient_input.setAttribute("placeholder", 'Food')
             ingredient_input.required = true
          
             ingredient_input.setAttribute("list", 'ingredient_list');
@@ -385,10 +384,10 @@ export default {
             ingredient_list.id = "ingredient_list"
             const ingredient_select = document.createElement("select")
             
-            for (var i = 0; i < arrayIngredients.length; i++) {
+            for (var i = 0; i < this.ingredients_list.length; i++) {
                 var option = document.createElement("option");
-                option.value = arrayIngredients[i].name;
-                option.text = arrayIngredients[i].name;
+                option.value = this.ingredients_list[i].name;
+                option.text = this.ingredients_list[i].name;
                 ingredient_select.appendChild(option);
             }
 
@@ -397,12 +396,11 @@ export default {
 
             
 
-            divFormGroup.appendChild(newLabel);
-            
 
             divFormGroup.appendChild(quantity)
             divFormGroup.appendChild(unitySelect)
             divFormGroup.appendChild(ingredient_input)
+            divFormGroup.appendChild(ingredient_delete)
             
 
 

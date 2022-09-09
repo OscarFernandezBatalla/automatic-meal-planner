@@ -1,7 +1,7 @@
 from dataclasses import field
 from statistics import mode
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from recipes.models import Recipe, CuisineStyle, Unit, FoodItem
+from recipes.models import Recipe, CuisineStyle, Unit, FoodItem, Difficulty
 #TODO: exemple
 """
 class RoomSerializer(ModelSerializer):
@@ -13,9 +13,8 @@ class RoomSerializer(ModelSerializer):
 class DifficultySerializer(ModelSerializer):
     
     class Meta:
-        model = Recipe
-        fields = ('DIFFICULTY',)
-
+        model = Difficulty
+        fields = "__all__"
 class CuisineStyleSerializer(ModelSerializer):
     
     class Meta:
