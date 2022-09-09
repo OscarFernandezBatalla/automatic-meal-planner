@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -11,8 +12,13 @@ class FoodItem(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
 
 
-class Quantity(models.Model):
+class Unit(models.Model):
     name = models.CharField(max_length=30, primary_key=True)
+
+
+class Quantity(models.Model):
+    value = models.IntegerField()
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
 
 
 class Ingredient(models.Model):
@@ -31,13 +37,20 @@ class Recipe(models.Model):
 
     name = models.CharField(max_length=30, null=True)
     image = models.ImageField(null=True, default="arroz.jpg")
-    dinners = models.IntegerField(null=True)
-    difficulty = models.IntegerField(choices=DIFFICULTY, null=True)
-    cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE, null=True) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
-    ingredients = models.ManyToManyField(Ingredient, null=True) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
-    fav = models.BooleanField(default=False, null=True)
-    time = models.IntegerField(null=True)
+    dinners = models.IntegerField()
+    difficulty = models.IntegerField(choices=DIFFICULTY)
+    cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
+    ingredients = models.ManyToManyField(Ingredient) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
+    time = models.IntegerField()
+
 
     def get_image(self):
         if self.image:
             return 'http://127.0.0.1:8000' + self.image.url
+
+
+class WebUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    liked_recipes = models.ManyToManyField(Recipe, related_name="liked_recipes")
+    own_recipes = models.ManyToManyField(Recipe, related_name="own_recipes") # maybe not
+    storage = models.ManyToManyField(Ingredient, related_name="storage")
