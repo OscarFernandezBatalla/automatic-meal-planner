@@ -30,14 +30,18 @@
                 <div class="form_group">
                     <label for="image">Image:</label>
                     <input type="file" id="image" @change="onChangeFile">
-            
+
                     <!-- <input id="room_name" name="room_name" type="text" placeholder="E.g. Mastering Python + Django" /> -->
                 </div>
 
 
                 <div class="form_group">
                     <label for="difficulty">Difficulty:</label>
-                    <input type="text" id="difficulty">
+                    <select v-model="difficulty" id="difficulty"> <!--TODO STYLE... -->
+                    <option v-for="dif in difficulty_list['DIFFICULTY']" v-bind:key="dif">{{dif}}</option>
+                    
+                    
+                    </select>
                     <!-- <input id="room_name" name="room_name" type="text" placeholder="E.g. Mastering Python + Django" /> -->
                 </div>
 
@@ -50,13 +54,30 @@
 
                 <div class="form_group">
                     <label for="time">Cuisine Style:</label>
-                    <select type="text" id="cuisine_style"> <!--TODO STYLE... -->
-                    <option value="traditional">Traditional</option>
-                    <option value="italian">Italian</option>
-                    <option value="greek">Greek</option>
-                    <option value="american">American</option>
+                    <select v-model="cuisine_style" id="cuisine_style"> <!--TODO STYLE... -->
+                    <option v-for="cuisine in cuisine_styles" v-bind:key="cuisine">{{cuisine.name}}</option>
+                    
                     </select>
                 </div>
+
+
+                <!-- <div class="form_group">
+                    <label for="Cuisine">Ingredients:</label>
+                    <input type="text" v-model="cuisine_style" id="cuisine_style" required list="cuisine_list">
+                    <datalist id="cuisine_list">
+                        <select id="recipe_style">
+                            <option v-for="cuisine in cuisine_styles" v-bind:key="cuisine.name">{{cuisine.name}}</option>
+                        </select>
+                    </datalist>
+                    
+                    
+                    
+                  
+                </div> -->
+
+
+
+
                 
                 <div class="ingredients-button-container">
                     <h1>Ingredients</h1>
@@ -101,29 +122,6 @@
 
                     </div>
 
-                    <div class="step-container">
-                     
-
-                            <div class="box-step-number">
-                                3
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ab ipsa commodi ratione obcaecati illum temporibus maiores iusto aperiam dignissimos voluptatem omnis magni quos blanditiis soluta maxime facere in minima excepturi culpa at, corporis nam reprehenderit aspernatur. Dolor, id? Impedit.</p>
-                            <button class="delete-step">X</button>
-
-                    </div>
-
-                    <div class="step-container">
-                     
-
-                            <div class="box-step-number">
-                                4
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ab ipsa commodi ratione obcaecati illum temporibus maiores iusto aperiam dignissimos voluptatem omnis magni quos blanditiis soluta maxime facere in minima excepturi culpa at, corporis nam reprehenderit aspernatur. Dolor, id? Impedit.</p>
-                            <button class="delete-step">X</button>
-
-                    </div>
 
                 </div>
 
@@ -159,15 +157,75 @@ export default {
             image: null,
             dinners: 1,
             difficulty: 1,
-            cuisine_style: 'traditional',
+            cuisine_style: null,
             ingredinets: null,
             fav: true,
             time: 30,
             num_steps: 0,
+            cuisine_styles: null,
+            num_ingredient: 0,
+            units: null,
+            difficulty_list: null,
+            ingredients_list: null,
+       
         }
+    },
+    created(){
+        this.getStyles()
+        this.getUnits()
+        this.getIngredients()
+        this.getDifficulty()
     },
 
     methods:{
+
+        getDifficulty(){
+            axios
+            .get('/api/difficulty/')
+            .then(response => {
+            this.difficulty_list = response.data[0]
+            console.log("dificulty")
+            console.log(response.data[0])
+            })
+            .catch(error => {
+            console.log(error)
+            })   
+        },
+
+         getIngredients(){
+            axios
+            .get('/api/food_items/')
+            .then(response => {
+            this.ingredients_list = response.data
+            console.log(response.data)
+            })
+            .catch(error => {
+            console.log(error)
+            })
+        },
+
+        getUnits(){
+            axios
+            .get('/api/units/')
+            .then(response => {
+            this.units = response.data
+            })
+            .catch(error => {
+            console.log(error)
+            })
+        },
+
+        getStyles(){
+            axios
+            .get('/api/cuisine_styles/')
+            .then(response => {
+            this.cuisine_styles = response.data
+            this.cuisine_style = this.cuisine_styles[0].name		  
+            })
+            .catch(error => {
+            console.log(error)
+            })
+        },
         onChangeFile(event){
             this.image = event.target.files[0]
             console.log(this.image)
@@ -244,12 +302,32 @@ export default {
         },
 
         addIngredient(){
-            const ingredient_list = document.getElementById("ingredient-list");
+
+            console.log(this.num_ingredient)
+            // div class="form_group">
+            //         <label for="Cuisine">Ingredients:</label>
+            //         <input type="text" v-model="cuisine_style" id="cuisine_style" required list="cuisine_list"> <!--TODO STYLE... -->
+            //         <datalist id="cuisine_list">
+            //             <select id="recipe_style">
+            //                 <option v-for="cuisine in cuisine_styles" v-bind:key="cuisine.name">{{cuisine.name}}</option>
+            //             </select>
+            //         </datalist>
+            // div
+            
+
+
+
+
+
+
+            const ingredient_list_div = document.getElementById("ingredient-list");
             
             //li.appendChild(document.createTextNode("Element 4"));
             //ul.appendChild(li);
-            var arrayIngredients = ["Patata","Aceite","Mayonesa","Pollo"];
+            var arrayIngredients = ["Patata","Aceite","Mayonesa","Pollo"]; //TODO: axios on create!
+            var arrayIngredients = this.ingredients_list
             var arrayUnities = ["Gramos","Pizca","Cucharada","Cucharadita"];
+            var arrayUnities = this.units
 
             const newLabel = document.createElement("label");
             newLabel.setAttribute("for", 'checkbox');
@@ -257,6 +335,9 @@ export default {
 
             const divFormGroup = document.createElement("div");
             divFormGroup.classList.add('form_group')
+
+
+            
             
             const ingredientSelect = document.createElement("select");
             //newCheckbox.setAttribute("type", 'text');
@@ -276,30 +357,57 @@ export default {
 
 
             //Create and append the options
-            for (var i = 0; i < arrayIngredients.length; i++) {
-                var option = document.createElement("option");
-                option.value = arrayIngredients[i];
-                option.text = arrayIngredients[i];
-                ingredientSelect.appendChild(option);
-            }
+            // for (var i = 0; i < arrayIngredients.length; i++) {
+                // var option = document.createElement("option");
+                // option.value = arrayIngredients[i];
+                // option.text = arrayIngredients[i];
+                // ingredientSelect.appendChild(option);
+            // }
 
             for (var i = 0; i < arrayUnities.length; i++) {
                 var option = document.createElement("option");
-                option.value = arrayUnities[i];
-                option.text = arrayUnities[i];
+                option.value = arrayUnities[i].name;
+                option.text = arrayUnities[i].name;
                 unitySelect.appendChild(option);
             }
             
+
+
+            this.num_ingredient += 1
+            const ingredient_input = document.createElement("input");
+            ingredient_input.type = "text"
+            ingredient_input.id="ingredient"+String(this.num_ingredient)
+            ingredient_input.required = true
+         
+            ingredient_input.setAttribute("list", 'ingredient_list');
+
+            const ingredient_list = document.createElement("datalist");
+            ingredient_list.id = "ingredient_list"
+            const ingredient_select = document.createElement("select")
+            
+            for (var i = 0; i < arrayIngredients.length; i++) {
+                var option = document.createElement("option");
+                option.value = arrayIngredients[i].name;
+                option.text = arrayIngredients[i].name;
+                ingredient_select.appendChild(option);
+            }
+
+            ingredient_list.appendChild(ingredient_select)
+            ingredient_input.appendChild(ingredient_list)
+
             
 
             divFormGroup.appendChild(newLabel);
-            divFormGroup.appendChild(ingredientSelect);
+            
 
             divFormGroup.appendChild(quantity)
             divFormGroup.appendChild(unitySelect)
+            divFormGroup.appendChild(ingredient_input)
+            
 
 
-            ingredient_list.appendChild(divFormGroup);
+
+            ingredient_list_div.appendChild(divFormGroup);
             //Todo: Create Ingredient with autocomplete (name ingredient) + quantity + unity
         },
 

@@ -1,12 +1,14 @@
 from curses.ascii import HT
 from django.http import JsonResponse
 from django.http import HttpResponse
+
+
 from recipes.forms import RecipeForm
 import json
 #from recipes.models import Room
 #from .serializers import RoomSerializer
-from recipes.models import Recipe, CuisineStyle
-from recipes.api.serializers import RecipeSerializer
+from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem
+from recipes.api.serializers import RecipeSerializer, CuisineStyleSerializer, UnitSerializer, FoodItemSerializer, DifficultySerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -38,6 +40,33 @@ def get_recipe_by_id(request, recipe_id):
     serializer = RecipeSerializer(recipe, many=False)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def get_styles(request):
+    cuisine_styles = CuisineStyle.objects.all()
+    serializer = CuisineStyleSerializer(cuisine_styles, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_units(request):
+    units = Unit.objects.all()
+    serializer = UnitSerializer(units, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_food_items(request):
+    ingredients = FoodItem.objects.all()
+    serializer = FoodItemSerializer(ingredients, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_difficulty(request):
+    difficulty = Recipe.objects.all()
+    serializer = DifficultySerializer(difficulty, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 def create_recipe(request):
     #form = RecipeForm()
@@ -55,10 +84,12 @@ def create_recipe(request):
             image = request.FILES.get('image'),
             dinners = data.get('dinners'),
             difficulty = data.get('difficulty'),
-            cuisine_style = CuisineStyle.objects.filter(name='Tradicional').first(),
+            cuisine_style = CuisineStyle.objects.filter(name=data.get('cuisine_style')).first(),
             time = data.get('time'),
 
         )
+
+
 
  #       for ing in ingredients_list:
 #            recipe.ingredients.add(ing)

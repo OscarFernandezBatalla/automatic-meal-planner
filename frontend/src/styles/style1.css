@@ -516,10 +516,26 @@ nav{
   border: 1px black solid;
   border-radius: 20px;
   background-color: var(--card-color-primary);
-  padding-left: 2%;
+  
+  margin-left: 2rem;
+  text-align: center;
 
   
   
+}
+.modal #image{
+  border-radius: 0;
+
+  
+}
+
+.modal select{
+  margin-left: 2rem;
+  border-radius: 20px;
+  background-color: var(--card-color-primary);
+  padding: 0.5rem;
+  padding-left: 2rem;
+
 }
 
 .modal #image{
@@ -630,3 +646,4 @@ nav{
   padding: 20px;
 
 }
+

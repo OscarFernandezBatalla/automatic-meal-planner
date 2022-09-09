@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
 
 
@@ -49,8 +51,16 @@ class Recipe(models.Model):
             return 'http://127.0.0.1:8000' + self.image.url
 
 
-class WebUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+class User(AbstractUser):
+    name = models.CharField(max_length=200, null=True)
+    email = models.EmailField(unique=True, null=True)
+    bio = models.TextField(null=True)
+    avatar = models.ImageField(null=True, default="avatar.svg")
     liked_recipes = models.ManyToManyField(Recipe, related_name="liked_recipes")
     own_recipes = models.ManyToManyField(Recipe, related_name="own_recipes") # maybe not
     storage = models.ManyToManyField(Ingredient, related_name="storage")
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    
