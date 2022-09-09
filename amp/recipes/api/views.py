@@ -1,14 +1,12 @@
 from curses.ascii import HT
 from django.http import JsonResponse
 from django.http import HttpResponse
-
-
 from recipes.forms import RecipeForm
 import json
 #from recipes.models import Room
 #from .serializers import RoomSerializer
 
-from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem, Difficulty
+from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem, Difficulty, Quantity
 from recipes.api.serializers import RecipeSerializer, CuisineStyleSerializer, UnitSerializer, FoodItemSerializer, DifficultySerializer
 
 from rest_framework.decorators import api_view
@@ -77,7 +75,8 @@ def create_recipe(request):
 
     if request.method == 'POST':
         data = request.POST
-        ingredients_list = data.get('ingredients')
+        ingredients_list = json.loads(data.get('ingredients'))
+
 
         # TODO: change the create of the recipe -> cuisine style, difficulty, etc...
    
@@ -91,6 +90,17 @@ def create_recipe(request):
             time = data.get('time'),
 
         )
+
+        for ingredient in ingredients_list:
+            ingredient = json.loads(ingredient)
+            food_item = ingredient['food_item']
+            quantity = ingredient['quantity']
+            unit = ingredient['unit']
+
+            quantity_db = Quantity.objects.get_or_create(value=quantity, unit=unit)
+            ingredient_db = Ingredient.objects.get_or_create(food_item = food_item, quantity = quantity_db)
+
+            recipe.ingredients.add(ingredient_db)
 
 
 

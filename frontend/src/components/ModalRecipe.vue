@@ -167,6 +167,7 @@ export default {
             units: null,
             difficulty_list: null,
             ingredients_list: null,
+            ingredients_recipe: {},
        
         }
     },
@@ -239,9 +240,28 @@ export default {
             bodyFormData.append('dinners', this.dinners)
             bodyFormData.append('difficulty', this.difficulty)
             bodyFormData.append('cuisine_style', this.cuisine_style)
-            bodyFormData.append('ingredinets', this.ingredinets)
+            // bodyFormData.append('ingredinets', this.ingredinets)
             bodyFormData.append('fav', this.fav)
             bodyFormData.append('time', this.time)
+            
+            var food_items_ingredient = document.getElementsByClassName('food_item_ingredient')
+            var quantities_ingredient = document.getElementsByClassName('quantity_ingredient')
+            var units_ingredients = document.getElementsByClassName('unity_ingredient')
+
+            for (var i = 1; i <= this.num_ingredient; i++) {
+                
+                this.ingredients_recipe['ingredient' + String(i)] = JSON.stringify({
+                    "food_item" : food_items_ingredient[i-1].value,
+                    "quantity" : quantities_ingredient[i-1].value,
+                    "unit" : units_ingredients[i-1].value
+                })
+            }
+
+            bodyFormData.append('ingredients',  JSON.stringify(this.ingredients_recipe))
+
+            console.log(this.ingredients_recipe)
+
+            
         
             await axios
             .post('/api/create-recipe/', bodyFormData, {
@@ -354,12 +374,15 @@ export default {
             //newCheckbox.setAttribute("type", 'text');
             unitySelect.setAttribute("id", 'unity1');
             unitySelect.classList.add('ingredient-select')
+            unitySelect.classList.add('unity_ingredient')
+            
 
 
 
             const quantity = document.createElement("input");
             quantity.setAttribute("type", 'text');
             quantity.setAttribute("placeholder", 'Quantity')
+            quantity.classList.add('quantity_ingredient')
 
 
             for (var i = 0; i < this.units.length; i++) {
@@ -377,6 +400,7 @@ export default {
             ingredient_input.id="ingredient"+String(this.num_ingredient)
             ingredient_input.setAttribute("placeholder", 'Food')
             ingredient_input.required = true
+            ingredient_input.classList.add('food_item_ingredient')
          
             ingredient_input.setAttribute("list", 'ingredient_list');
 
