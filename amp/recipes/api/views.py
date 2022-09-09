@@ -5,7 +5,7 @@ from recipes.forms import RecipeForm
 import json
 #from recipes.models import Room
 #from .serializers import RoomSerializer
-from recipes.models import Recipe, CuisineStyle
+from recipes.models import Recipe, CuisineStyle, Difficulty
 from recipes.api.serializers import RecipeSerializer
 
 from rest_framework.decorators import api_view
@@ -21,7 +21,6 @@ def get_all_recipes(request):
     return Response(serializer.data)
 
 
-
 @api_view(['POST'])
 def post_fav(request, id):
 
@@ -32,11 +31,20 @@ def post_fav(request, id):
 
     return HttpResponse('Correct')
 
+
 @api_view(['GET'])
 def get_recipe_by_id(request, recipe_id):
     recipe = Recipe.objects.get(pk=recipe_id)
     serializer = RecipeSerializer(recipe, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_all_difficulty_levels(request):
+    difficulties = Difficulty.objects.all()
+    serializer = RecipeSerializer(difficulties, many=True)
+    return Response(serializer.data)
+
 
 @api_view(['POST'])
 def create_recipe(request):
@@ -54,7 +62,7 @@ def create_recipe(request):
             name = data.get('name'),
             image = request.FILES.get('image'),
             dinners = data.get('dinners'),
-            difficulty = data.get('difficulty'),
+            difficulty = Difficulty.objects.filter(name=data.get('difficulty')).first(),
             cuisine_style = CuisineStyle.objects.filter(name='Tradicional').first(),
             time = data.get('time'),
 

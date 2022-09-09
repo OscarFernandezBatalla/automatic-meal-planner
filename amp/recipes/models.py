@@ -31,19 +31,16 @@ class Step(models.Model):
     text = models.CharField(max_length=250)
 
 
-class Recipe(models.Model):
-    DIFFICULTY = (
-        (1, 'Muy fácil'),
-        (2, 'Fácil'),
-        (3, 'Media'),
-        (4, 'Difícil'),
-        (5, 'Muy difícil')
-    )
+class Difficulty(models.Model):
+    name = models.CharField(max_length=30)
+    value = models.IntegerField()
 
+
+class Recipe(models.Model):
     name = models.CharField(max_length=30, null=True)
     image = models.ImageField(null=True, default="arroz.jpg")
     dinners = models.IntegerField()
-    difficulty = models.IntegerField(choices=DIFFICULTY)
+    difficulty = models.ForeignKey(Difficulty, on_delete=models.CASCADE)
     cuisine_style = models.ForeignKey(CuisineStyle, on_delete=models.CASCADE) # one recipe has only ONE cuisine_style, but a cuisine_style can be in MANY recipes.
     ingredients = models.ManyToManyField(Ingredient) # one recipe has MANY ingredients, but an ingredient can be in MANY recipes.
     time = models.IntegerField()
