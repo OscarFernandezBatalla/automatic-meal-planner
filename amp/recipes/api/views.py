@@ -1,13 +1,14 @@
-from curses.ascii import HT
-from django.http import JsonResponse
+# from curses.ascii import HT
+# from django.http import JsonResponse
 from django.http import HttpResponse
-from recipes.forms import RecipeForm
+# from recipes.forms import RecipeForm
 import json
-#from recipes.models import Room
-#from .serializers import RoomSerializer
+# from recipes.models import Room
+# from .serializers import RoomSerializer
 
 from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem, Difficulty, Quantity
-from recipes.api.serializers import RecipeSerializer, CuisineStyleSerializer, UnitSerializer, FoodItemSerializer, DifficultySerializer
+from recipes.api.serializers import RecipeSerializer, CuisineStyleSerializer, UnitSerializer, FoodItemSerializer, \
+    DifficultySerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -24,7 +25,6 @@ def get_all_recipes(request):
 
 @api_view(['POST'])
 def post_fav(request, id):
-
     if request.method == 'POST':
         recipe = Recipe.objects.get(pk=id)
         recipe.fav = not recipe.fav
@@ -41,11 +41,11 @@ def get_recipe_by_id(request, recipe_id):
 
 
 @api_view(['GET'])
-
 def get_styles(request):
     cuisine_styles = CuisineStyle.objects.all()
     serializer = CuisineStyleSerializer(cuisine_styles, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def get_units(request):
@@ -60,6 +60,7 @@ def get_food_items(request):
     serializer = FoodItemSerializer(ingredients, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def get_all_difficulty_levels(request):
     difficulties = Difficulty.objects.all()
@@ -69,56 +70,50 @@ def get_all_difficulty_levels(request):
 
 @api_view(['POST'])
 def create_recipe(request):
-    #form = RecipeForm()
-    
-    #TODO: create is_valid method ¿?
+    # form = RecipeForm()
+
+    # TODO: create is_valid method ¿?
 
     if request.method == 'POST':
         data = request.POST
         ingredients_list = json.loads(data.get('ingredients'))
 
-
         # TODO: change the create of the recipe -> cuisine style, difficulty, etc...
-   
-        recipe = Recipe.objects.create(
-            name = data.get('name'),
-            image = request.FILES.get('image'),
-            dinners = data.get('dinners'),
 
-            difficulty = Difficulty.objects.filter(name=data.get('difficulty')).first(),
-            cuisine_style = CuisineStyle.objects.filter(name=data.get('cuisine_style')).first(),
-            time = data.get('time'),
+        recipe = Recipe.objects.create(
+            name=data.get('name'),
+            image=request.FILES.get('image'),
+            dinners=data.get('dinners'),
+
+            difficulty=Difficulty.objects.filter(name=data.get('difficulty')).first(),
+            cuisine_style=CuisineStyle.objects.filter(name=data.get('cuisine_style')).first(),
+            time=data.get('time'),
 
         )
 
-        for ingredient in ingredients_list:
-            ingredient = json.loads(ingredient)
+        for key, value in ingredients_list.items():
+            ingredient = json.loads(value)
             food_item = ingredient['food_item']
             quantity = ingredient['quantity']
             unit = ingredient['unit']
 
-            quantity_db = Quantity.objects.get_or_create(value=quantity, unit=unit)
-            ingredient_db = Ingredient.objects.get_or_create(food_item = food_item, quantity = quantity_db)
-
+            unit_db, unit_created = Unit.objects.get_or_create(name=unit)
+            quantity_db, quantity_created = Quantity.objects.get_or_create(value=quantity, unit=unit_db)
+            food_item_db, food_item_created = FoodItem.objects.get_or_create(name=food_item)
+            ingredient_db, ingredient_created = Ingredient.objects.get_or_create(food_item=food_item_db,
+                                                                                 quantity=quantity_db)
             recipe.ingredients.add(ingredient_db)
 
-
-
- #       for ing in ingredients_list:
-#            recipe.ingredients.add(ing)
-
     return HttpResponse(request.FILES)
-
 
     # name = request.POST.get('name'),
     #         image = request.POST.get('image'),
     #         dinners = request.POST.get('dinners'),
     #         difficulty = request.POST.get('difficulty'),
     #         cuisine_style = request.POST.get('cuisine_style'),
-            
+
     #         fav = request.POST.get('fav'),
     #         time = request.POST.get('time'),
-
 
     # {
     #             name: this.name,
