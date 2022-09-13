@@ -95,32 +95,7 @@
                 </div>
 
                 <div id="step-list">
-                    <div id="step-1" class="step-container">
-                     
-
-                            <div class="box-step-number">
-                                1
-                            </div>
-
-
-                            <textarea wrap="hard" name = "step1"></textarea>
-
-                           
-                            <button class="delete-step" @click="removeStep">X</button>
-
-                    </div>
-
-                    <div class="step-container">
-                     
-
-                            <div class="box-step-number">
-                                2
-                            </div>
-
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo ab ipsa commodi ratione obcaecati illum temporibus maiores iusto aperiam dignissimos voluptatem omnis magni quos blanditiis soluta maxime facere in minima excepturi culpa at, corporis nam reprehenderit aspernatur. Dolor, id? Impedit.</p>
-                            <button class="delete-step">X</button>
-
-                    </div>
+       
 
 
                 </div>
@@ -308,16 +283,69 @@ export default {
 
         },
         addStep(){
+
+            // <div id="step-list">
+            //         <div id="step-1" class="step-container">
+                     
+
+            //                 <div class="box-step-number">
+            //                     1
+            //                 </div>
+
+
+            //                 <textarea wrap="hard" name = "step1"></textarea>
+
+                           
+            //                 <button class="delete-step" @click="removeStep">X</button>
+
+            //         </div>
+            // </div>
+
+            this.num_steps += 1
+
             const step_list = document.getElementById("step-list");
 
             const divFormGroup = document.createElement("div");
-            divFormGroup.classList.add('form_group')
+            divFormGroup.classList.add('step-container')
+            divFormGroup.setAttribute('id', 'step'+String(this.num_steps))
 
-            divFormGroup.innerHTML += 'hola'
+            const box_number = document.createElement("div")
+            box_number.innerHTML += String(this.num_steps)
+            box_number.classList.add('box-step-number')
+
+            const text_step = document.createElement("textarea")
+            text_step.setAttribute('wrap','hard')
+            text_step.id = "text_step"+String(this.num_steps)
+
+            const delete_step = document.createElement("button")
+            delete_step.classList.add('delete-step')
+            delete_step.innerHTML += 'x'
+            
+            delete_step.onclick = function (){
+                let delete_div = document.getElementById(divFormGroup.id)
+                delete_div.remove()
+                console.log(this.num_steps)
+                num_steps = this.num_steps - 1
+                console.log(this.num_steps)
+            }
+            
 
 
+            divFormGroup.appendChild(box_number)
+            divFormGroup.appendChild(text_step)
+            divFormGroup.appendChild(delete_step)
 
             step_list.appendChild(divFormGroup);
+
+            if(step_list.childElementCount>1){
+                let delete_buttons = document.getElementsByClassName('delete-step')
+               
+                for(var i=0; i<delete_buttons.length - 1; i++ ){
+                    delete_buttons[i].disabled = true;
+                }
+        
+            }
+
 
         },
 
