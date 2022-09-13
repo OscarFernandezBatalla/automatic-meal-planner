@@ -6,7 +6,7 @@ import json
 # from recipes.models import Room
 # from .serializers import RoomSerializer
 
-from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem, Difficulty, Quantity
+from recipes.models import Recipe, CuisineStyle, Unit, Ingredient, FoodItem, Difficulty, Quantity, Step
 from recipes.api.serializers import RecipeSerializer, CuisineStyleSerializer, UnitSerializer, FoodItemSerializer, \
     DifficultySerializer
 
@@ -77,6 +77,7 @@ def create_recipe(request):
     if request.method == 'POST':
         data = request.POST
         ingredients_list = json.loads(data.get('ingredients'))
+        steps_list = json.loads(data.get('steps'))
 
         # TODO: change the create of the recipe -> cuisine style, difficulty, etc...
 
@@ -100,9 +101,15 @@ def create_recipe(request):
             unit_db, unit_created = Unit.objects.get_or_create(name=unit)
             quantity_db, quantity_created = Quantity.objects.get_or_create(value=quantity, unit=unit_db)
             food_item_db, food_item_created = FoodItem.objects.get_or_create(name=food_item)
-            ingredient_db, ingredient_created = Ingredient.objects.get_or_create(food_item=food_item_db,
-                                                                                 quantity=quantity_db)
+            ingredient_db, ingredient_created = Ingredient.objects.get_or_create(food_item=food_item_db, quantity=quantity_db)
             recipe.ingredients.add(ingredient_db)
+
+        for key, value in steps_list.items():
+            step = json.loads(value)
+            order = step['order']
+            text = step['text']
+            step_db, step_created = Step.objects.get_or_create(order=order, text= text)
+            recipe.steps.add(step_db)
 
     return HttpResponse(request.FILES)
 

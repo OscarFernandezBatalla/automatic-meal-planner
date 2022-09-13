@@ -143,6 +143,7 @@ export default {
             difficulty_list: null,
             ingredients_list: null,
             ingredients_recipe: {},
+            steps_recipe:{},
        
         }
     },
@@ -219,6 +220,7 @@ export default {
             bodyFormData.append('fav', this.fav)
             bodyFormData.append('time', this.time)
             
+            //Ingredients append
             var food_items_ingredient = document.getElementsByClassName('food_item_ingredient')
             var quantities_ingredient = document.getElementsByClassName('quantity_ingredient')
             var units_ingredients = document.getElementsByClassName('unity_ingredient')
@@ -234,7 +236,19 @@ export default {
 
             bodyFormData.append('ingredients',  JSON.stringify(this.ingredients_recipe))
 
-            console.log(this.ingredients_recipe)
+            //Steps append
+            var text_step = document.getElementsByClassName('text_step')
+
+            for (var i = 1; i <= this.num_steps; i++) {
+                
+                this.steps_recipe['step' + String(i)] = JSON.stringify({
+                    "order" : i-1,
+                    "text" : text_step[i-1].value,
+                })
+            }
+            bodyFormData.append('steps',  JSON.stringify(this.steps_recipe))
+
+            console.log(this.steps_recipe)
 
             
         
@@ -315,18 +329,25 @@ export default {
 
             const text_step = document.createElement("textarea")
             text_step.setAttribute('wrap','hard')
+            text_step.classList.add('text_step')
             text_step.id = "text_step"+String(this.num_steps)
 
             const delete_step = document.createElement("button")
             delete_step.classList.add('delete-step')
             delete_step.innerHTML += 'x'
             
+            const self = this;
+
             delete_step.onclick = function (){
                 let delete_div = document.getElementById(divFormGroup.id)
                 delete_div.remove()
-                console.log(this.num_steps)
-                num_steps = this.num_steps - 1
-                console.log(this.num_steps)
+                self.num_steps = self.num_steps - 1
+                if(self.num_steps>0){
+                    const step_list = document.getElementById("step-list");
+                    var delete_step_button = document.getElementsByClassName('delete-step')
+                    delete_step_button = delete_step_button[delete_step_button.length-1]
+                    delete_step_button.disabled = false;
+                }
             }
             
 
